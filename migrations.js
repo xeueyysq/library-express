@@ -1,4 +1,4 @@
-const {pool} = require('../lib-express/db');
+const { pool } = require('./db');
 
 (async () => {
     try {
@@ -73,10 +73,10 @@ const {pool} = require('../lib-express/db');
         EXECUTE FUNCTION increase_book_quantity();        
         `);
 
-        console.log('Все миграции успешно загружены')
+        console.log('Все миграции успешно загружены');
     } catch (error) {
         console.error('Ошибка загрузки миграций', error);
     } finally {
         await pool.end();
     }
-});
+})();
