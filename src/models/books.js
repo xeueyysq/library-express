@@ -16,11 +16,24 @@ class Books {
         }
     }
 
-    // async addBook (id, author, title, poster, description, pagecount, categories, publish_date) {
-    //     try {
-            
-    //     }
-    // }
+    async addBook(book) {
+        try {
+            const queryResult = await this.pool.query(`
+                INSERT INTO books (
+                    id, author, title, poster, description, pagecount, categories, publish_date
+                ) 
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                RETURNING id;
+            `, [
+                book.id, book.author, book.title, book.poster, book.description, book.pagecount, book.categories, book.publish_date
+            ]);
+    
+            return 'book', queryResult.rows[0].id, 'added';
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
     // async createTemplate(id_1c, complectId, teacher, year, discipline, userName) {
     //     try {
     //     //   const searchResult = await this.pool.query(`
