@@ -17,6 +17,7 @@ class Books {
     }
 
     async addBook(book) {
+        console.log('Вот книги: ', book)
         try {
             const queryResult = await this.pool.query(`
                 INSERT INTO books (
